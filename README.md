@@ -23,7 +23,7 @@
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="assets/screenshot.png" alt="App Screenshot" width="600">
+  <img src="assets/screenshot.PNG" alt="App Screenshot" width="400">
 </p>
 
 

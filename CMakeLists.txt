@@ -1,7 +1,7 @@
 ﻿# CMakeList.txt : CMake project for reducord, include source and define
 # project specific logic here.
 #
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 3.21)
 
 # Enable Hot Reload for MSVC compilers if supported.
 if (POLICY CMP0141)
@@ -9,7 +9,7 @@ if (POLICY CMP0141)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-project ("reducord")
+project (reducord LANGUAGES CXX)
 
 find_package (imgui CONFIG REQUIRED)
 
@@ -26,11 +26,19 @@ add_executable (reducord
 )
 
 target_link_libraries (reducord PRIVATE
-	imgui::imgui
-	d3d11
-	d3dcompiler
-	dxgi
+		imgui::imgui
+		d3d11
+		d3dcompiler
+		dxgi
 )
+
+if (WIN32)
+	target_link_libraries (reducord PRIVATE
+		d3d11
+		d3dcompiler
+		dxgi
+	)
+endif()
 
 target_include_directories(reducord PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}/src

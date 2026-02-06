@@ -1,9 +1,9 @@
 ﻿<p align="center">
-  <img src="assets/logo.png" alt="Reducord Logo" width="128">
+  <img src="assets/logo.png" alt="Reducord Logo" width="512">
   <br>
   <b>A lightweight, high-performance cleanup utility for Discord power users</b>
   <br>
-  <i>Built with C++, Dear ImGui, and DirectX 11.</i>
+  <i>Built with C++, Dear ImGui, and DirectX 11</i>
 </p>
 
 <p align="center">

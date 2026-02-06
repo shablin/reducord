@@ -3,11 +3,7 @@ name: reducord-windows
 on:
   push:
     branches: ["master"]
-    tags:
-      - "v*"
   pull_request:
-    tags:
-      - "v*"
     branches: ["master"]
 
 jobs:
@@ -31,9 +27,3 @@ jobs:
 
     - name: Build
       run: cmake --build build --config Release
-
-    - name: Upload to GitHub Release
-      uses: softprops/action-gh-release@v2
-      with:
-        files: |
-          build/Release/reducord.exe

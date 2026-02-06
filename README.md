@@ -23,7 +23,7 @@
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="assets/screenshot.png" alt="App Screenshot" width="600">
+  <img src="assets/screenshot.PNG" alt="App Screenshot" width="400">
 </p>
 
 
@@ -46,5 +46,5 @@
 ### Instructions
 1. **Clone the repo:**
    ```bash
-   git clone [https://github.com/shablin/reducord.git](https://github.com/shablin/reducord.git)
+   git clone https://github.com/shablin/reducord.git
    cd reducord

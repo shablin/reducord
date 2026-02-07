@@ -1,5 +1,7 @@
 ﻿#include "reducord.h"
 #include "ui/Application.hpp"
+#define IMPL_FLAGS
+#include "cli/flags.h"
 
 #include <Windows.h>
 #include <dwmapi.h>
@@ -29,9 +31,80 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 using namespace std;
 
-int main()
+int main_gui();
+int main_cli(int argc, char** argv);
+
+int main(int argc, char** argv)
 {
-	ImGui_ImplWin32_EnableDpiAwareness();
+    if (argc <= 1) return main_gui();
+    return main_cli(argc, argv);
+}
+
+#pragma region TestingGarbage
+
+void test_cc() {
+    printf("Clean Cache [WIP]\n");
+}
+
+void test_cl() {
+    printf("Clean Logs [WIP]\n");
+}
+
+void test_cv() {
+    printf("Clean Versions [WIP]\n");
+}
+
+void test_hp() {
+    printf("High Priority [WIP]\n");
+}
+
+#pragma endregion
+
+int main_cli(int argc, char** argv) {
+    AttachConsole(ATTACH_PARENT_PROCESS);
+    freopen("CONOUT$", "w", stdout); // Setting stdout up
+
+    flag_handler_t flags = {0};
+    flags_mk_handler(&flags);
+    flags_add_flag(
+        &flags,
+        FLAG_CLEAN_CACHE,
+        (char*)"-cc",
+        &test_cc
+    );
+
+    flags_add_flag(
+        &flags,
+        FLAG_CLEAN_LOGS,
+        (char*)"-cl",
+        &test_cl
+    );
+
+    flags_add_flag(
+        &flags,
+        FLAG_CLEAN_VERSIONS,
+        (char*)"-cv",
+        &test_cc
+    );
+
+    flags_add_flag(
+        &flags,
+        FLAG_HIGH_PRIORITY,
+        (char*)"-hp",
+        &test_hp
+    );
+
+    flags_execute(&flags, argc, argv);
+
+    flags_free_handler(&flags, false);
+
+    freopen("NUL", "w", stdout); // Cleaning stdout up
+    FreeConsole();
+    return 0;
+}
+
+int main_gui() {
+    	ImGui_ImplWin32_EnableDpiAwareness();
 
 	WNDCLASSEXW wc =
     {

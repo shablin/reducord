@@ -137,7 +137,7 @@ namespace Reducord::Core::Optimizer
 			}
 
 			logger.Info("Found " + std::to_string(stats.total_files_count) +
-						"(" + Utils::FormattedSize(stats.total_size_bytes) + ")"
+						" (" + Utils::FormattedSize(stats.total_size_bytes) + ")"
 						" files");
 
 			size_t deleted = 0;
@@ -156,7 +156,8 @@ namespace Reducord::Core::Optimizer
 			}
 
 			logger.Success("Cleanup finished. Removed " + std::to_string(deleted) +
-						   "(" + Utils::FormattedSize(total) + ")" " files");
+						   " (" + Utils::FormattedSize(stats.total_size_bytes) + ")"
+						   " files");
 		}
 	};
 

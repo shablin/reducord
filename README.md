@@ -7,9 +7,9 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/v/release/shablin/reducord?style=flat-square&color=blue" alt="Release">
-  <img src="https://img.shields.io/github/license/shablin/reducord?style=flat-square" alt="License">
-  <img src="https://img.shields.io/github/actions/workflow/status/shablin/reducord/cmake-single-platform.yml?style=flat-square" alt="Build Status">
+  <img src="https://img.shields.io/github/v/release/shablin/reducord?style=for-the-badge&color=blue" alt="Release">
+  <img src="https://img.shields.io/github/license/shablin/reducord?style=for-the-badge" alt="License">
+  <img src="https://img.shields.io/github/actions/workflow/status/shablin/reducord/cmake-single-platform.yml?style=for-the-badge" alt="Build Status">
 </p>
 
 

@@ -222,11 +222,22 @@ namespace Reducord::Core::Optimizer
 
 	void TaskManager::RunQueue(Models::AppStats& stats,
 							   Logger::ILogger &logger,
-							   const std::vector<TaskType> &tasks)
+							   const std::vector<TaskType> &tasks) 
+	{
+		RunQueue(stats, logger, tasks, [](){});
+	}
+
+	void TaskManager::RunQueue(Models::AppStats& stats,
+							   Logger::ILogger &logger,
+							   const std::vector<TaskType> &tasks,
+								std::function<void()> callback)
 	{
 		stats.is_optimizing = true;
 		stats.total_steps = static_cast<int>(tasks.size());
 		stats.current_step = 0;
+
+
+		logger.Info("[Running tasks]: " + std::to_string(tasks.size()));
 
 		for (const auto& task : tasks)
 		{
@@ -243,5 +254,6 @@ namespace Reducord::Core::Optimizer
 
 		stats.is_optimizing = false;
 		logger.Success("All selected tasks completed");
+		callback();
 	}
 }

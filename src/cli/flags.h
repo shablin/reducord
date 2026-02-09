@@ -4,6 +4,7 @@
 #include <stdbool.h>
 
 typedef enum {
+    FLAG_HELP,
     FLAG_CLEAN_CACHE,
     FLAG_CLEAN_LOGS,
     FLAG_CLEAN_VERSIONS,
@@ -12,6 +13,7 @@ typedef enum {
 } option_flag_t;
 
 typedef void (*flag_callback_t)(void);
+typedef void (*unk_flag_callback_t)(char*);
 
 typedef struct {
     char** names;
@@ -40,6 +42,12 @@ void flags_free_handler(flag_handler_t* handler, bool free_ptr);
     corresponding callbacks, if found any.
 */
 void flags_execute(flag_handler_t* handler, int argc, char** argv);
+
+/*
+    Same as `flags_execute`, but calls `unk_cb(flag)`, if unknown flag is found.
+    Behaves as `flags_execute`, if `unk_cb` is `NULL`.
+*/
+void flags_execute_unk(flag_handler_t* handler, int argc, char** argv, unk_flag_callback_t unk_cb);
 
 #ifdef IMPL_FLAGS
 #include "./impl/flags_impl.c"

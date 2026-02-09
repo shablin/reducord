@@ -37,10 +37,16 @@ void flags_free_handler(flag_handler_t* handler, bool free_ptr) {
 }
 
 void flags_execute(flag_handler_t* handler, int argc, char** argv) {
+    flags_execute_unk(handler, argc, argv, NULL);
+}
+
+void flags_execute_unk(flag_handler_t* handler, int argc, char** argv, unk_flag_callback_t unk_cb) {
     bool has_executed[FLAG_CNT] = {0};
     for (int ai = 1; ai < argc; ai++) {
+        bool known = false;
         for (int fi = 0; fi < FLAG_CNT; fi++) {
             if (strcmp(argv[ai], handler->names[fi]) == 0) {
+                known = true;
                 if (!has_executed[fi]) {
                     handler->callbacks[fi]();
                     has_executed[fi] = true;
@@ -48,5 +54,6 @@ void flags_execute(flag_handler_t* handler, int argc, char** argv) {
                 break;
             }
         }
+        if (!known) if (unk_cb) unk_cb(argv[ai]);
     }
 }

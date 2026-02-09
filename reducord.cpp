@@ -3,6 +3,8 @@
 #define IMPL_FLAGS
 #include "cli/flags.h"
 
+#include "cli/CliApp.hpp"
+
 #include <Windows.h>
 #include <dwmapi.h>
 #include <d3d11.h>
@@ -40,67 +42,11 @@ int main(int argc, char** argv)
     return main_cli(argc, argv);
 }
 
-#pragma region TestingGarbage
-
-void test_cc() {
-    printf("Clean Cache [WIP]\n");
-}
-
-void test_cl() {
-    printf("Clean Logs [WIP]\n");
-}
-
-void test_cv() {
-    printf("Clean Versions [WIP]\n");
-}
-
-void test_hp() {
-    printf("High Priority [WIP]\n");
-}
-
-#pragma endregion
-
 int main_cli(int argc, char** argv) {
-    AttachConsole(ATTACH_PARENT_PROCESS);
-    freopen("CONOUT$", "w", stdout); // Setting stdout up
-
-    flag_handler_t flags = {0};
-    flags_mk_handler(&flags);
-    flags_add_flag(
-        &flags,
-        FLAG_CLEAN_CACHE,
-        (char*)"-cc",
-        &test_cc
-    );
-
-    flags_add_flag(
-        &flags,
-        FLAG_CLEAN_LOGS,
-        (char*)"-cl",
-        &test_cl
-    );
-
-    flags_add_flag(
-        &flags,
-        FLAG_CLEAN_VERSIONS,
-        (char*)"-cv",
-        &test_cc
-    );
-
-    flags_add_flag(
-        &flags,
-        FLAG_HIGH_PRIORITY,
-        (char*)"-hp",
-        &test_hp
-    );
-
-    flags_execute(&flags, argc, argv);
-
-    flags_free_handler(&flags, false);
-
-    freopen("NUL", "w", stdout); // Cleaning stdout up
-    FreeConsole();
-    return 0;
+    Reducord::Cli::App::setup_terminal();
+    int r = Reducord::Cli::App::run(argc, argv);
+    Reducord::Cli::App::cleanup_terminal();
+    return r;
 }
 
 int main_gui() {

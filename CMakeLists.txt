@@ -16,6 +16,8 @@ find_package (imgui CONFIG REQUIRED)
 file(GLOB_RECURSE SRC
 	"src/*.cpp"
 	"src/*.hpp"
+	"src/*.c"
+	"src/*.h"
 )
 
 # Add source to this project's executable.

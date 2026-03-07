@@ -24,6 +24,11 @@ file(GLOB_RECURSE SRC
 add_executable (reducord
 	"reducord.cpp"
 	"reducord.h"
+	
+	
+	"resource.rc"
+	"resource.aps"
+	"assets/icon.ico"
 	${SRC}
 )
 

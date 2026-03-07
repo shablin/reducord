@@ -50,7 +50,10 @@ int main_cli(int argc, char** argv) {
 }
 
 int main_gui() {
-    	ImGui_ImplWin32_EnableDpiAwareness();
+    ImGui_ImplWin32_EnableDpiAwareness();
+
+    HICON hAppIcon = LoadIcon(GetModuleHandle(nullptr),
+                              MAKEINTRESOURCE(101));
 
 	WNDCLASSEXW wc =
     {
@@ -59,7 +62,7 @@ int main_gui() {
 		WndProc,
 		0L, 0L,
 		GetModuleHandle(nullptr),
-		nullptr, nullptr,
+		hAppIcon, hAppIcon,
 		nullptr, nullptr,
 		L"ImGui Example",
 		nullptr

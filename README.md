@@ -38,13 +38,4 @@
 
 ## 🏗️ Building from Source
 
-### Prerequisites
-* **Visual Studio 2026** (with C++ Desktop Development workload)
-* **CMake** (3.15+)
-* **vcpkg** (standard for MSVC)
-
-### Instructions
-1. **Clone the repo:**
-   ```bash
-   git clone https://github.com/shablin/reducord.git
-   cd reducord
+Building guide is available at [Wiki](https://github.com/shablin/reducord/wiki/Building).

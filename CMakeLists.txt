@@ -27,7 +27,6 @@ add_executable (reducord
 	
 	
 	"resource.rc"
-	"resource.aps"
 	"assets/icon.ico"
 	${SRC}
 )

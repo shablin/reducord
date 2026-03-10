@@ -1,10 +1,11 @@
 #include <windows.h>
+#include "src/version.h"
 
 101     ICON    "assets/icon.ico"
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,2,0,0
- PRODUCTVERSION 0,2,0,0
+ FILEVERSION APP_VERSION_RC
+ PRODUCTVERSION APP_VERSION_RC
  FILEFLAGSMASK 0x3fL
  FILESUBTYPE 0x0L
 BEGIN
@@ -14,12 +15,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Reducord Authors"
             VALUE "FileDescription", "Lightweight Discord cleanup utility"
-            VALUE "FileVersion", "0.2.0.0"
+            VALUE "FileVersion", APP_VERSION_STR
             VALUE "InternalName", "Reducord"
             VALUE "LegalCopyright", "Copyright (C) 2026 Maxim Shablin & KCJ"
             VALUE "OriginalFilename", "Reducord"
             VALUE "ProductName", "Reducord"
-            VALUE "ProductVersion", "0.2.0.0"
+            VALUE "ProductVersion", APP_VERSION_STR
         END
     END
     BLOCK "VarFileInfo"

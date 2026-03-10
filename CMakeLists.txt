@@ -9,7 +9,15 @@ if (POLICY CMP0141)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-project (reducord LANGUAGES CXX)
+project (reducord
+	VERSION 0.2.3
+	LANGUAGES CXX
+)
+
+configure_file(
+	version.h.in
+	${CMAKE_CURRENT_SOURCE_DIR}/src/version.h
+)
 
 find_package (imgui CONFIG REQUIRED)
 

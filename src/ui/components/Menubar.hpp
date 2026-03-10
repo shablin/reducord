@@ -4,6 +4,7 @@
 #include "../StateContext.hpp"
 #include <imgui.h>
 #include <windows.h>
+#include "version.h"
 
 
 namespace Reducord::UI
@@ -52,7 +53,7 @@ namespace Reducord::UI
 			{
 				ImGui::Text("Reducord. Lightweight Discord cleanup\n"
 							"utility built with Win32 API & Dear ImGui");
-				ImGui::TextDisabled("v0.2.1");
+				ImGui::TextDisabled("v" APP_VERSION_STR);
 				ImGui::Spacing();
 
 				ImGui::Text("Powered by Maxim Shablin & KCJ");

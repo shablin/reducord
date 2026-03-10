@@ -50,11 +50,11 @@ namespace Reducord::UI
 				ImGuiWindowFlags_AlwaysAutoResize |
 				ImGuiWindowFlags_NoMove))
 			{
-				ImGui::Text("Reducord Optimizer");
-				ImGui::TextDisabled("v1.0.0");
+				ImGui::Text("Reducord");
+				ImGui::TextDisabled("v0.2.1");
 				ImGui::Separator();
 
-				ImGui::Text("TODO");
+				ImGui::Text("Powered by Maxim Shablin & KCJ");
 				ImGui::Separator();
 
 				if (ImGui::Button("Close", ImVec2(120, 0)))

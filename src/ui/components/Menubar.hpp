@@ -42,20 +42,22 @@ namespace Reducord::UI
 		{
 			if (context.show_about_popup)
 			{
-				ImGui::OpenPopup("AboutPopup");
+				ImGui::OpenPopup("About Reducord");
 				context.show_about_popup = false;
 			}
 
-			if (ImGui::BeginPopupModal("AboutPopup", nullptr,
+			if (ImGui::BeginPopupModal("About Reducord", nullptr,
 				ImGuiWindowFlags_AlwaysAutoResize |
 				ImGuiWindowFlags_NoMove))
 			{
-				ImGui::Text("Reducord");
+				ImGui::Text("Reducord. Lightweight Discord cleanup\n"
+							"utility built with Win32 API & Dear ImGui");
 				ImGui::TextDisabled("v0.2.1");
-				ImGui::Separator();
+				ImGui::Spacing();
 
 				ImGui::Text("Powered by Maxim Shablin & KCJ");
-				ImGui::Separator();
+				ImGui::TextDisabled("GNU GENERAL PUBLIC LICENSE");
+				ImGui::Spacing();
 
 				if (ImGui::Button("Close", ImVec2(120, 0)))
 				{

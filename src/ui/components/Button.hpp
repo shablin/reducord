@@ -1,3 +1,17 @@
+/**
+ * @file Button.hpp
+ * @brief Defines the Button component for triggering optimization tasks in the Reducord UI.
+ * 
+ * This file contains the declaration of the Button class, which is responsible for rendering
+ * an "Optimize" button in the Reducord UI. When clicked, the button initiates
+ * the optimization process based on the selected tasks in the StateContext.
+ * The button is disabled while an optimization process is ongoing.
+ * 
+ * @author The Reducord Authors
+ * @date 2026-03-14
+ */
+
+
 #pragma once
 
 #include "Component.hpp"
@@ -7,6 +21,13 @@
 
 namespace Reducord::UI
 {
+	/**
+	 * @brief Component responsible for rendering an "Optimize" button in the Reducord UI.
+	 * 
+	 * The Button component renders a button that, when clicked, initiates the optimization process
+	 * based on the selected tasks in the StateContext. The button is disabled while an optimization
+	 * process is ongoing to prevent multiple concurrent optimizations.
+	 */
 	class Button : public IComponent
 	{
 	public:
@@ -27,6 +48,12 @@ namespace Reducord::UI
 			ImGui::EndDisabled();
 		}
 	private:
+
+
+		/**
+		 * @brief Initiates the optimization process based
+		 * on the selected tasks in the StateContext.
+		 */
 		void StartOptimizationProcess__OLD()
 		{
 			std::vector<Core::Optimizer::TaskType> selected_tasks;
@@ -58,7 +85,24 @@ namespace Reducord::UI
 			worker.detach();
 		}
 
-		private: 
+		private:
+
+
+		/**
+		 * @brief Initiates the optimization process using the TaskRunner,
+		 * which manages task execution and progress updates.
+		 * 
+		 * The TaskRunner allows for conditional task addition based
+		 * on the StateContext's settings and handles the execution
+		 * flow of the optimization tasks.
+		 * 
+		 * This method simplifies the initiation of the optimization process
+		 * by leveraging the TaskRunner's capabilities to manage tasks
+		 * and update application state accordingly.
+		 * 
+		 * It ensures that only the selected tasks are executed and that progress
+		 * is tracked and logged effectively.
+		 */
 		void StartOptimizationProcess() {
 			Core::Optimizer::TaskRunner::GetOrCreate()
 			.AddTaskConditional(Core::Optimizer::TaskType::CleanCache, context.clean_cache)

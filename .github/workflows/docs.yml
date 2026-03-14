@@ -21,6 +21,12 @@ jobs:
       - name: Install Doxygen
         run: sudo apt-get install -y doxygen
 
+      - name: Create Docs Directory
+        run: mkdir -p docs
+
+      - name: Generate Documentation
+        run: doxygen Doxyfile
+
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:

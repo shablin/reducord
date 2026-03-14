@@ -1,3 +1,16 @@
+/**
+ * @file LogComponent.hpp
+ * @brief Defines the LogComponent class for displaying application logs in the Reducord UI.
+ * 
+ * This file contains the declaration of the LogComponent class, which is responsible for
+ * rendering the application logs in a scrollable child window. It retrieves log entries from
+ * the StateContext's logger and displays them with color coding based on log levels.
+ * 
+ * @author The Reducord Authors
+ * @date 2026-03-14
+ */
+
+
 #pragma once
 
 #include "Component.hpp"
@@ -6,13 +19,38 @@
 #include <imgui.h>
 
 
+/**
+ * @namespace Reducord::UI
+ * @brief Contains all UI-related classes and components for the Reducord application.
+ */
 namespace Reducord::UI
 {
+	
+
+	/**
+	 * @brief Component responsible for rendering application logs in the UI.
+	 * 
+	 * The LogComponent retrieves log entries from the StateContext's logger and displays them
+	 * in a scrollable child window. Each log entry is color-coded based on its log level
+	 * (Info, Warning, Error, Success).
+	 */
 	class LogComponent : public IComponent
 	{
 	public:
+
+
+		/**
+		 * @brief Constructor that initializes the LogComponent with a reference to the state context.
+		 * 
+		 * @param ctx Reference to the StateContext, allowing access to the logger and other shared state.
+		 * @note The constructor uses the base class constructor to initialize the context reference.
+		 */
 		using IComponent::IComponent;
 
+
+		/**
+		 * @brief Renders the log entries in a scrollable child window.
+		 */
 		void Render() override
 		{
 			ImGui::SeparatorText("Details");
@@ -41,6 +79,14 @@ namespace Reducord::UI
 			ImGui::EndChild();
 		}
 	private:
+
+
+		/**
+		 * @brief Returns the color associated with a given log level.
+		 * @param level The log level for which to retrieve the color.
+		 *
+		 * @return An ImVec4 representing the color for the specified log level
+		 */
 		ImVec4 GetColorForLevel(Core::Logger::LogLevel level)
 		{
 			switch (level)
@@ -53,6 +99,14 @@ namespace Reducord::UI
 			}
 		}
 
+
+		/**
+		 * @brief Returns a string prefix for a given log level.
+		 * @param level The log level for which to retrieve the prefix.
+		 *
+		 * @return A string representing the log level
+		 * (e.g., "INFO", "WARN", "ERROR", "OK").
+		 */
 		std::string LogPreffixByLevel(Core::Logger::LogLevel level)
 		{
 			switch (level)

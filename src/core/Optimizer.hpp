@@ -10,10 +10,10 @@ namespace Reducord::Core::Optimizer
 {
 	enum class TaskType
 	{
-		CleanCache,
-		CleanLogs,
-		CleanVersions,
-		HigherPriorityProcess
+		CleanCache,				///< Cleans the Discord cache, including IndexDB, GPU Cache, and shaders.
+		CleanLogs,				///< Cleans the Discord log files.
+		CleanVersions,			///< Cleans the Discord version files, which can free up space by removing old versions of Discord that are no longer needed.
+		HigherPriorityProcess	///< Sets the Discord process priority to high, which can improve performance during optimization tasks.
 	};
 
 	class ITask

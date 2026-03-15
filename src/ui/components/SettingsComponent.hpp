@@ -1,3 +1,15 @@
+/**
+ * @file SettingsComponent.hpp
+ * @brief UI component for rendering optimization strategy settings.
+ * 
+ * This component allows users to configure various optimization strategies,
+ * such as cleaning cache, logs, versions, and setting process priority.
+ * It also handles disabling the settings when an optimization process is active.
+ * 
+ * @see IComponent
+*/
+
+
 #pragma once
 
 #include "Component.hpp"
@@ -7,6 +19,14 @@
 
 namespace Reducord::UI
 {
+
+
+	/**
+	 * @class SettingsComponent
+	 * 
+	 * @brief UI component responsible for rendering
+	 * optimization strategy settings in the Reducord UI.
+	*/
 	class SettingsComponent : public IComponent
 	{
 	public:

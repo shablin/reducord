@@ -1,8 +1,23 @@
+/**
+ * @file AppStats.hpp
+ * @brief Struct for storing application statistics related to the optimization process.
+ * 
+ * @author The Reducord Authors
+ * @date 2026-03-15
+*/
+
+
 #pragma once
 
 
 namespace Reducord::Core::Models
 {
+
+
+	/**
+	 * @brief Struct for storing application
+	 * statistics related to the optimization process.
+	*/
 	struct AppStats
 	{
 		std::atomic<float>		progress{ 0.0f };

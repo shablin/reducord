@@ -35,9 +35,11 @@ namespace Reducord::UI
 
 
 	/**
-	* @brief Class responsible for managing shared
-	* application state in the Reducord UI.
-	*/
+	 * @class StateContext
+	 * 
+	 * @brief Class responsible for managing shared
+	 * application state in the Reducord UI.
+	 */
 	class StateContext
 	{
 	private:

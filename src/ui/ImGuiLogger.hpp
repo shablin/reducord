@@ -24,6 +24,14 @@
 
 namespace Reducord::UI
 {
+
+
+	/**
+	 * @class ImGuiLogger
+	 * 
+	 * @brief ImGuiLogger uses for logging messages
+	 * in the Reducord UI with help of the ImGui library.
+	 */
 	class ImGuiLogger : public Core::Logger::ILogger
 	{
 	private:

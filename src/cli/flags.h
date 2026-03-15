@@ -1,15 +1,24 @@
+/**
+ * @file flags.h
+ * @brief Provides an interface for handling command-line flags in the Reducord CLI application.
+ * 
+ * @author The Reducord Authors
+ * @date 2026-03-15
+ */
+
+
 #ifndef __FLAGS_H__
 #define __FLAGS_H__
 
 #include <stdbool.h>
 
 typedef enum {
-    FLAG_HELP,
-    FLAG_CLEAN_CACHE,
-    FLAG_CLEAN_LOGS,
-    FLAG_CLEAN_VERSIONS,
-    FLAG_HIGH_PRIORITY,
-    FLAG_CNT
+	FLAG_HELP,              //< Displays help information about the CLI application and its available flags.
+	FLAG_CLEAN_CACHE,       //< Deletes the Discord cache, including IndexDB, GPU Cache, and shaders.
+	FLAG_CLEAN_LOGS,        //< Deletes the Discord log files.
+	FLAG_CLEAN_VERSIONS,    //< Deletes the Discord version files, which can free up space by removing old versions of Discord that are no longer needed.
+	FLAG_HIGH_PRIORITY,     //< Sets the Discord process priority to high, which can improve performance during optimization tasks.
+	FLAG_CNT                //< Number of flags.
 } option_flag_t;
 
 typedef void (*flag_callback_t)(void);

@@ -10,13 +10,14 @@
   <img src="https://img.shields.io/github/v/release/shablin/reducord?style=for-the-badge&color=blue" alt="Release">
   <img src="https://img.shields.io/github/license/shablin/reducord?style=for-the-badge" alt="License">
   <img src="https://img.shields.io/github/actions/workflow/status/shablin/reducord/cmake-single-platform.yml?style=for-the-badge" alt="Build Status">
+  <img src="https://img.shields.io/github/actions/workflow/status/shablin/reducord/docs.yml?label=docs&logo=doxygen&style=for-the-badge" alt="Docs Status">
 </p>
 
 
 ## 🚀 Key Features
 
 * **🧹 Deep Cache Cleaning:** Safely wipe GPU cache, IndexDB, and temporary files that slow down the app.
-* **🧼 logs Log Eraser:** Clear out bloated log files that eat up your disk space.
+* **🧼 Log Eraser:** Clear out bloated log files that eat up your disk space.
 * **📦 Version Manager:** Identify and remove old Discord versions left behind after updates.
 * **🔒 Safety First:** Built-in protection prevents cleaning while Discord is running to avoid data corruption.
 

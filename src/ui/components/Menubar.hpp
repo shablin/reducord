@@ -23,6 +23,8 @@
 namespace Reducord::UI
 {
 	/**
+	 * @class MenuBar
+	 * 
 	 * @brief Component responsible for rendering
 	 * the menu bar in the Reducord UI.
 	 */

@@ -28,6 +28,8 @@ namespace Reducord::UI
 	
 
 	/**
+	 * @class LogComponent
+	 * 
 	 * @brief Component responsible for rendering application logs in the UI.
 	 * 
 	 * The LogComponent retrieves log entries from the StateContext's logger and displays them

@@ -32,6 +32,7 @@ namespace Reducord::UI
 
 
 	/**
+	 * @class IComponent
 	 * @brief Interface for UI components in the Reducord application.
 	 */
 	class IComponent

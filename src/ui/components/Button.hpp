@@ -22,6 +22,8 @@
 namespace Reducord::UI
 {
 	/**
+	 * @class Button
+	 * 
 	 * @brief Component responsible for rendering an "Optimize" button in the Reducord UI.
 	 * 
 	 * The Button component renders a button that, when clicked, initiates the optimization process

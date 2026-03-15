@@ -1,3 +1,13 @@
+/**
+ * @file ProgressBar.hpp
+ * 
+ * @brief Defines the ProgressBar component for displaying optimization progress in the Reducord UI.
+ * 
+ * @author The Reducord Authors
+ * @date 2026-03-15
+*/
+
+
 #pragma once
 
 #include "./Component.hpp"
@@ -7,6 +17,10 @@
 
 namespace Reducord::UI
 {
+	/**
+	 * @class ProgressBar
+	 * @brief Component responsible for rendering a progress bar in the Reducord UI.
+	*/
 	class ProgressBar : public IComponent
 	{
 	public:

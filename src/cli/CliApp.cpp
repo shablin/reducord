@@ -58,15 +58,30 @@ void flag_unknown(char* flag) {
 namespace Reducord::Cli::App {
 
     void setup_terminal() {
+        
+        /*
+        HANDLE consoleHandleOut = GetStdHandle(STD_OUTPUT_HANDLE);
         AttachConsole(ATTACH_PARENT_PROCESS);
-        freopen("CONOUT$", "w", stdout);
-        printf("\x1b[2K\x1b[0E");
+        FILE* f;
+        freopen_s(&f, "CONOUT$", "w", stdout);
+
+        DWORD mode;
+        GetConsoleMode(consoleHandleOut, &mode);
+        SetConsoleMode(consoleHandleOut, mode);
+        //press_enter();
+        printf("\x1b[0G\x1b[0J\x1b[0G");
+        
+        SetStdHandle(STD_OUTPUT_HANDLE, consoleHandleOut);
+        setvbuf(stdout, NULL, _IONBF, 0);
+        */
     }
 
     void cleanup_terminal() {
+        /*
         press_enter();
         freopen("NUL", "w", stdout);
         FreeConsole();
+        */
     }
 
     int run(int argc, char** argv) {

@@ -14,7 +14,7 @@
 #include "imgui_impl_dx11.h"
 
 #pragma comment(lib, "dwmapi.lib")
-#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
+#pragma comment(linker, "/SUBSYSTEM:console /ENTRY:mainCRTStartup")
 
 static ID3D11Device*            g_pd3dDevice            = nullptr;
 static ID3D11DeviceContext*     g_pd3dDeviceContext     = nullptr;
@@ -50,7 +50,8 @@ int main_cli(int argc, char** argv) {
 }
 
 int main_gui() {
-    	ImGui_ImplWin32_EnableDpiAwareness();
+    //FreeConsole();
+    ImGui_ImplWin32_EnableDpiAwareness();
 
 	WNDCLASSEXW wc =
     {

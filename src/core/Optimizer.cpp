@@ -66,6 +66,9 @@ namespace Reducord::Core::Optimizer
 
 	std::unique_ptr<ITask> TaskFactory::CreateTask(TaskType type)
 	{
+		if (type <= TaskType::CF_CNT) {
+			throw ERROR_ILLEGAL_CHARACTER;
+		}
 		switch (type)
 		{
 		case TaskType::CleanCache:
@@ -88,29 +91,74 @@ namespace Reducord::Core::Optimizer
 		RunQueue(stats, logger, tasks, [](){});
 	}
 
+	size_t _CountTasks(const std::vector<TaskType> &tasks) {
+		size_t r = tasks.size();
+		for (const auto task : tasks) {
+			if (task <= TaskType::CF_CNT) r--;
+		}
+		return r;
+	}
+
+	void _RunTask(Models::AppStats& stats, Logger::ILogger &logger, TaskType tt) {
+		auto task = TaskFactory::CreateTask(tt);
+		if (task) {
+			stats.current_step++;
+			logger.Info(
+				"Stage " + std::to_string(stats.current_step) +
+				"/" + std::to_string(stats.total_steps) +
+				": " + task->GetName()
+			);
+			task->Execute(stats, logger);
+		}
+	}
+
 	void TaskManager::RunQueue(Models::AppStats& stats,
 							   Logger::ILogger &logger,
 							   const std::vector<TaskType> &tasks,
 								std::function<void()> callback)
 	{
+		auto tasksCnt = _CountTasks(tasks);
 		stats.is_optimizing = true;
-		stats.total_steps = static_cast<int>(tasks.size());
+		stats.total_steps = static_cast<int>(tasksCnt);
 		stats.current_step = 0;
 
 
-		logger.Info("[Running tasks]: " + std::to_string(tasks.size()));
+		logger.Info("[Running tasks]: " + std::to_string(tasksCnt));
+		bool doMulti = false;
+		std::vector<TaskType> multi;
 
 		for (const auto& task : tasks)
 		{
-			auto task_ = TaskFactory::CreateTask(task);
-			if (task_)
-			{
-				stats.current_step++;
-				logger.Info("Stage " + std::to_string(stats.current_step) +
-							"/" + std::to_string(stats.total_steps) +
-							": " + task_->GetName());
-				task_->Execute(stats, logger);
+			if (task == TaskType::CF_ParallelStart) {
+				doMulti = true;
+				continue;
 			}
+
+			if (task == TaskType::CF_ParallelEnd) {
+				doMulti = false;
+				Logger::ILogger* logger_ctx = &logger;
+				Models::AppStats* stats_ctx = &stats;
+				
+				std::vector<std::thread> workers(4);
+				for (const auto& taskM : multi) {
+					std::thread worker(
+						[logger_ctx, stats_ctx, taskM](){
+							_RunTask(*stats_ctx, *logger_ctx, taskM);
+						}
+					);
+					workers.push_back(move(worker));
+				}
+				for (auto& worker : workers) if (worker.joinable()) worker.join();
+				multi.clear();
+				continue;
+			}
+
+			if (doMulti) {
+				multi.push_back(task);
+				continue;
+			}
+
+			_RunTask(stats, logger, task);
 		}
 
 		stats.is_optimizing = false;

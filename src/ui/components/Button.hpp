@@ -61,9 +61,11 @@ namespace Reducord::UI
 		private: 
 		void StartOptimizationProcess() {
 			Core::Optimizer::TaskRunner::GetOrCreate()
-			.AddTaskConditional(Core::Optimizer::TaskType::CleanCache, context.clean_cache)
-			.AddTaskConditional(Core::Optimizer::TaskType::CleanLogs, context.clean_logs)
-			.AddTaskConditional(Core::Optimizer::TaskType::CleanVersions, context.clean_versions)
+			.StartParallelGroup()
+				.AddTaskConditional(Core::Optimizer::TaskType::CleanCache, context.clean_cache)
+				.AddTaskConditional(Core::Optimizer::TaskType::CleanLogs, context.clean_logs)
+				.AddTaskConditional(Core::Optimizer::TaskType::CleanVersions, context.clean_versions)
+			.EndParallelGroup()
 			.AddTaskConditional(Core::Optimizer::TaskType::HigherPriorityProcess, context.higher_priority_process)
 			.Flush(context);
 		}

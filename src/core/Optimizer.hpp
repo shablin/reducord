@@ -10,6 +10,9 @@ namespace Reducord::Core::Optimizer
 {
 	enum class TaskType
 	{
+		CF_ParallelStart,
+		CF_ParallelEnd,
+		CF_CNT,
 		CleanCache,
 		CleanLogs,
 		CleanVersions,
@@ -50,11 +53,22 @@ namespace Reducord::Core::Optimizer
 
         private: std::vector<TaskType> _tasks;
 		private: bool _inProcess;
+		private: size_t _openGroups;
 
         public: static TaskRunner& GetOrCreate() {
             static TaskRunner r;
             return r;
         }
+
+		public: TaskRunner& StartParallelGroup() {
+			_openGroups++;
+			return AddTask(TaskType::CF_ParallelStart);
+		}
+
+		public: TaskRunner& EndParallelGroup() {
+			_openGroups--;
+			return AddTask(TaskType::CF_ParallelEnd);
+		}
 
         public: TaskRunner& AddTask(TaskType t) {
 			return AddTaskConditional(t, true);
@@ -69,6 +83,11 @@ namespace Reducord::Core::Optimizer
 		public: TaskRunner& FlushEx(Reducord::UI::StateContext& ctx, bool async) {
 			if (_inProcess) {
 				ctx.logger->Error("Optimizing is in process. Please wait.");
+				return *this;
+			}
+
+			if (_openGroups != 0) {
+				ctx.logger->Error("[Internal Error: Parallel task groups were layouted incorrectly]\nPlease, report this error if you had encountered it.");
 				return *this;
 			}
 			ctx.logger->Info("[Running tasks via TaskRunner by KCJ]");
